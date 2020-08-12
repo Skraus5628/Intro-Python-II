@@ -3,6 +3,7 @@
 
 from room import Room
 
+# MIght reuse this to allow users to type full direction values instead of n w e s
 direction_names = {
     'n': 'North',
     'e': 'East',
@@ -11,9 +12,8 @@ direction_names = {
 }
 
 class Player:
-    def __init__(self, name, current_room):
+    def __init__(self, name, room):
         self.name = name
-        self.current_room = current_room
-      
+        self.room = room
 
     

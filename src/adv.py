@@ -36,15 +36,17 @@ room['treasure'].s_to = room['narrow']
 
 #
 # Main
-#
+# valid_dirs = ['n', 'e', 'w', 's']
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player("Gwar", room["outside"])
 
        
 # Write a loop that:
 #
 # * Prints the current room name
-print(room)
+print(player.room.name)
+print(player.room.description)
 
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
@@ -53,3 +55,43 @@ print(room)
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+### REPL is repeat eval perform loop
+## elif = else if 
+# hasattr checks if () input has attribute
+
+
+
+userInput = input('Input a movement direction (n,w,s,e) Press "q" to quit.')
+
+#If the user isnt boring or doesnt read instructions and doesnt hit q
+while userInput != 'q':
+
+    # IF the user doesnt put any valid entry at all
+
+    if(userInput not in ['n', 'w', 's', 'e', 'q']):
+
+        userInput = input('Please enter a valid input or press "q" to quit.')
+
+    # If players current room doesnt have the specific movement attr input
+    # Prompt to move different direction.
+    
+    elif(not hasattr(player.room, f'{userInput}_to') and userInput != 'q'):
+
+        print(userInput)
+        userInput = input('You cannot move in that direction. Choose another or press "q" to quit.')
+
+    # If player puts in valid direction for current room print the name and description of room
+
+    elif(userInput != 'q'):
+
+        player.room = getattr(player.room, f'{userInput}_to')
+        # using f formatting to take in user input directional letter to fill 
+        #the n_to etc command
+        print(player.room.name)
+        print(player.room.description)
+
+#Repost user input window 
+        userInput = input('Input a movement direction (n,w,s,e_ or press "q" to quit.')
+
+        print('done')
